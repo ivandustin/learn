@@ -1,5 +1,5 @@
 from pathlib import Path
 
 
-def read(filepath: Path) -> list[int]:
-    return list(map(int, filepath.read_text().split(" ")))
+def read(filepath: Path) -> int:
+    return int(filepath.read_text())

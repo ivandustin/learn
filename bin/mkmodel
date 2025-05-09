@@ -4,9 +4,9 @@ from learn.model.create import create
 from learn.state.save import save
 from learn.txt.read import read
 
-dims = read(DIMS)[0]
-classes = read(CLASSES)[0]
-neurons = read(NEURONS)[0]
+dims = read(DIMS)
+classes = read(CLASSES)
+neurons = read(NEURONS)
 model = create(dims, classes, neurons)
 save(MODEL, model)
 checkpointer.close()

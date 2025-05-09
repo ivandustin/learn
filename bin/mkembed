@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 from learn import DIMS, FACTORS, EMBED, checkpointer
+from learn.txt.list.read import read as read_list
 from learn.state.list.save import save
 from learn.embed.create import create
 from learn.txt.read import read
 
-dims = read(DIMS)[0]
-factors = read(FACTORS)
+dims = read(DIMS)
+factors = read_list(FACTORS)
 embed = create(dims, factors)
 save(EMBED, embed)
 checkpointer.close()
