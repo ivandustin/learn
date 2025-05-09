@@ -1,7 +1,9 @@
 #!/usr/bin/env python
+from learn.embed.auto.create import create as create_embed
+from learn.model.auto.create import create as create_model
 from learn.state.list.load import load as load_list
 from learn.state.load import load
 from learn import EMBED, MODEL
 
-embed = load_list(EMBED)
-model = load(MODEL)
+embed = load_list(EMBED, create_embed())
+model = load(MODEL, create_model())

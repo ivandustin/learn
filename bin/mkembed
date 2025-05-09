@@ -3,6 +3,5 @@ from learn.embed.auto.create import create
 from learn.state.list.save import save
 from learn import EMBED, checkpointer
 
-embed = create()
-save(EMBED, embed)
+save(EMBED, create())
 checkpointer.close()
