@@ -1,5 +1,5 @@
-from learn import DIMS, CLASSES, NEURONS
 from learn.model.create import create as create_model
+from learn.paths.txt import DIMS, CLASSES, NEURONS
 from learn.txt.read import read
 
 
