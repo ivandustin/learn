@@ -4,8 +4,12 @@ from .batch.read import read as read_batch
 
 
 def read(filepath: Path):
+    xs = []
+    ys = []
     with open(filepath, "r") as file:
-        batch = list(read_batch(file))
-    xs = array([x for x, _ in batch]).transpose(0, 2, 1)
-    ys = array([y for _, y in batch])
+        for x, y in read_batch(file):
+            xs.append(x)
+            ys.append(y)
+    xs = array(xs).transpose(0, 2, 1) - 1
+    ys = array(ys) - 1
     return xs, ys
