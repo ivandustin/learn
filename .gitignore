@@ -1,2 +1,2 @@
-tests/*/state
+tests/*/state*
 __pycache__
