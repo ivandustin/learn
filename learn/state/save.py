@@ -1,7 +1,6 @@
 from flax.nnx import split
-from learn import checkpointer
 
 
-def save(filepath, model):
+def save(checkpointer, path, model):
     _, state = split(model)
-    checkpointer.save(filepath.resolve(), state)
+    checkpointer.save(path.resolve(), state, force=True)

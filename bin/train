@@ -1,4 +1,28 @@
 #!/usr/bin/env python
-from learn.model.load import load as load_model
+from pathlib import Path
+from sys import argv
+from orbax.checkpoint import StandardCheckpointer
+from learn.optimizer.create import create as create_optimizer
+from learn.model.create import create as create_model
+from learn.trainfile.read import read
+from learn.paths.state import MODEL
+from learn.state.load import load
+from learn.state.save import save
+from learn.train import train
 
-model = load_model()
+with StandardCheckpointer() as checkpointer:
+    trainfile = Path(argv[1])
+    steps = int(argv[2])
+    x, y = read(trainfile)
+    model = create_model()
+    if MODEL.exists():
+        model = load(checkpointer, MODEL, model)
+    optimizer = create_optimizer(model)
+    try:
+        for step in range(1, steps + 1):
+            loss = train(model, optimizer, x, y)
+            if step % 100 == 0:
+                print(step, loss)
+                save(checkpointer, MODEL, model)
+    except KeyboardInterrupt:
+        pass
