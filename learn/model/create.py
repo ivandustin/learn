@@ -6,8 +6,8 @@ from learn import rngs
 
 
 def create():
-    dims = read(DIMS)
-    classes = read(CLASSES)
-    neurons = read(NEURONS)
     embeds = read_list(EMBEDS)
-    return Model(dims, classes, embeds, neurons, rngs=rngs)
+    classes = read(CLASSES)
+    dims = read(DIMS)
+    neurons = read(NEURONS)
+    return Model(embeds, classes, dims, neurons, rngs=rngs)
