@@ -5,7 +5,7 @@ from .embeds import Embeds
 
 class Model(Module):
     def __init__(
-        self, dims: int, classes: int, embeds: list[int], neurons: int, rngs: Rngs
+        self, embeds: list[int], classes: int, dims: int, neurons: int, rngs: Rngs
     ):
         self.fn = Fn(dims, classes, neurons, rngs=rngs)
         self.embeds = Embeds(dims, embeds, rngs=rngs)
