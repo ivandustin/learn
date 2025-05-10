@@ -1,8 +1,0 @@
-#!/usr/bin/env python
-from learn.model.auto.create import create
-from learn.paths.state import MODEL
-from learn.state.save import save
-from learn import checkpointer
-
-save(MODEL, create())
-checkpointer.close()

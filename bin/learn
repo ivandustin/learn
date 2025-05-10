@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-from learn.embeds.auto.load import load as load_embeds
-from learn.model.auto.load import load as load_model
+from learn.model.load import load as load_model
 
-embeds = load_embeds()
 model = load_model()
