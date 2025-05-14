@@ -20,7 +20,7 @@ with StandardCheckpointer() as checkpointer:
     optimizer = create_optimizer(model)
     try:
         for step in range(1, steps + 1):
-            loss = train(model, optimizer, x, y)
+            loss = train(optimizer, model, x, y)
             if step % 100 == 0:
                 print(step, loss)
                 save(checkpointer, MODEL, model)
