@@ -1,13 +1,12 @@
-from flax.nnx import jit, vmap, value_and_grad, one_hot
-from optax.losses import softmax_cross_entropy
+from optax.losses import softmax_cross_entropy_with_integer_labels
+from flax.nnx import jit, value_and_grad, vmap
 
 
 @jit
-def train(optimizer, model, x, y, w):
+def train(optimizer, model, x, y):
     def loss(model):
-        logits = vmap(model)(x)
-        labels = one_hot(y, logits.shape[-1]) * w
-        return softmax_cross_entropy(logits, labels).mean()
+        yhat = vmap(model)(x)
+        return softmax_cross_entropy_with_integer_labels(yhat, y).mean()
 
     loss, grads = value_and_grad(loss)(model)
     optimizer.update(grads)
