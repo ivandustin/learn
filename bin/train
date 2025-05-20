@@ -6,17 +6,21 @@ from learn.optimizer.create import create
 from learn.trainfile.read import read
 from learn.paths.state import MODEL
 from learn.state.save import save
+from learn.batch import batch
 from learn.train import train
 from learn.load import load
 
 with StandardCheckpointer() as checkpointer:
     trainfile = Path(argv[1])
     steps = int(argv[2])
+    size = int(argv[3])
     x, y = read(trainfile)
+    batches = batch(size, x, y)
     model = load(checkpointer)
     optimizer = create(model)
     try:
         for step in range(1, steps + 1):
+            x, y = next(batches)
             loss = train(optimizer, model, x, y)
             if step % 100 == 0:
                 print(step, loss)

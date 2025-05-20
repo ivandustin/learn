@@ -1,5 +1,4 @@
-from time import time
+from .seed.create import create
 from flax.nnx import Rngs
 
-seed = int(time())
-rngs = Rngs(seed)
+rngs = Rngs(create())
