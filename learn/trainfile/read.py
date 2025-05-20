@@ -1,5 +1,6 @@
 from pathlib import Path
-from jax.numpy import array
+from jax.numpy import array as jax
+from numpy import array, stack
 from .batch.read import read as read_batch
 
 
@@ -8,8 +9,6 @@ def read(filepath: Path):
     ys = []
     with open(filepath, "r") as file:
         for x, y in read_batch(file):
-            xs.append(x)
-            ys.append(y)
-    xs = array(xs).transpose(0, 2, 1) - 1
-    ys = array(ys) - 1
-    return xs, ys
+            xs.append(array(x).T - 1)
+            ys.append(array(y) - 1)
+    return jax(stack(xs)), jax(stack(ys))
