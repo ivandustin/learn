@@ -12,8 +12,8 @@ from learn.load import load
 
 with StandardCheckpointer() as checkpointer:
     trainfile = Path(argv[1])
-    steps = int(argv[2])
-    size = int(argv[3])
+    size = int(argv[2])
+    steps = int(argv[3])
     x, y = read(trainfile)
     batches = batch(size, x, y)
     model = load(checkpointer)
