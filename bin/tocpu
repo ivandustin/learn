@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from orbax.checkpoint import StandardCheckpointer
+from jax import devices, device_put
 from flax.nnx import split, merge
-from jax import device_put
 from learn.paths.state import MODEL
 from learn.state.save import save
 from learn.load import load
@@ -9,7 +9,8 @@ from learn.load import load
 with StandardCheckpointer() as checkpointer:
     model = load(checkpointer)
     graph, state = split(model)
-    state = device_put(state)
+    cpu = devices("cpu")[0]
+    state = device_put(state, device=cpu)
     model = merge(graph, state)
     outpath = MODEL.with_suffix(".cpu")
     save(checkpointer, outpath, model)
