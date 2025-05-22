@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from sys import argv
 from orbax.checkpoint import StandardCheckpointer
-from numpy import load as load_array
+from numpy import load
 from learn.optimizer.create import create
 from learn.load import load as load_model
 from learn.paths.state import MODEL
@@ -13,7 +13,9 @@ with StandardCheckpointer() as checkpointer:
     filepath = argv[1]
     size = int(argv[2])
     steps = int(argv[3])
-    x, y = load_array(filepath).values()
+    with load(filepath) as data:
+        x = data["x"]
+        y = data["y"]
     batches = batch(size, x, y)
     model = load_model(checkpointer)
     optimizer = create(model)
