@@ -9,9 +9,7 @@ from learn.train import train
 from learn.read import read
 
 with StandardCheckpointer() as checkpointer:
-    filepath = argv[1]
-    size = int(argv[2])
-    steps = int(argv[3])
+    steps = int(argv[1])
     batches = read(stdin)
     model = load_model(checkpointer)
     optimizer = create(model)
