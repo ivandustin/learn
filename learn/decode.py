@@ -4,4 +4,5 @@ from numpy import load
 
 
 def decode(batch: str):
-    return load(BytesIO(b64decode(batch)))
+    with load(BytesIO(b64decode(batch))) as result:
+        return result["x"], result["y"]

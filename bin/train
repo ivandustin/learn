@@ -15,8 +15,7 @@ with StandardCheckpointer() as checkpointer:
     optimizer = create(model)
     try:
         for step in range(1, steps + 1):
-            batch = decode(next(batches))
-            x, y = batch["x"], batch["y"]
+            x, y = decode(next(batches))
             loss = train(optimizer, model, x, y)
             if step % 100 == 0:
                 print(step, loss)
