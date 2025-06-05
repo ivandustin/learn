@@ -2,9 +2,9 @@
 from sys import argv, stdin
 from orbax.checkpoint import StandardCheckpointer
 from learn.optimizer.create import create
+from learn.batch.decode import decode
 from learn.paths.state import MODEL
 from learn.state.save import save
-from learn.decode import decode
 from learn.train import train
 from learn.load import load
 
