@@ -1,6 +1,6 @@
-from flax.nnx import Optimizer
+from flax.nnx import ModelAndOptimizer
 from optax import adam
 
 
 def create(model):
-    return Optimizer(model, adam(1e-3))
+    return ModelAndOptimizer(model, adam(1e-3))
